@@ -13,3 +13,4 @@ MySQL
 * Import the project into sts
 * Add the lombok plugin into sts
 * Install MySQL workbench and create schema and tables as present in application.properties file of this project.
+* Run the application.
