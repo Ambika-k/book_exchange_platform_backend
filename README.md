@@ -1,7 +1,7 @@
 # Backend code for Book Exchnage Platform Application
 
 ## Technologies Used
-Java
+Java,
 Spring boot
 
 ## Database used 
