@@ -12,6 +12,7 @@ import com.book.exchange.entity.Book;
 import com.book.exchange.entity.User;
 import com.book.exchange.enums.AvailabilityStatus;
 import com.book.exchange.enums.BookCondition;
+import com.book.exchange.exception.BookNotFoundException;
 import com.book.exchange.exception.UserNotFoundException;
 import com.book.exchange.repository.BookRepository;
 import com.book.exchange.repository.UserRepository;
@@ -92,6 +93,9 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public CustomResponse editBook(EditBookRequest editBookRequest) {
 		Book book = bookRepository.findByBookId(editBookRequest.getBookId());
+		if(null == book) {
+			throw new BookNotFoundException("No such book exists");
+		}
 		book.setTitle((null!= editBookRequest.getTitle())? editBookRequest.getTitle():book.getTitle());
 		book.setAuthor((null != editBookRequest.getAuthor())?editBookRequest.getAuthor():book.getAuthor());
 		book.setGenre((null != editBookRequest.getGenre())?editBookRequest.getGenre():book.getGenre());
@@ -106,6 +110,9 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public CustomResponse deleteBook(String bookId) {
 		Book book = bookRepository.findByBookId(bookId);
+		if(null == book) {
+			throw new BookNotFoundException("No such book exists");
+		}
 		bookRepository.delete(book);
 		CustomResponse customResponse = new CustomResponse("Deleted book successfully");
 		return customResponse;

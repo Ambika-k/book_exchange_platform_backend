@@ -23,8 +23,12 @@ public class GlobalExceptionHandler {
 	}
 	@ExceptionHandler(InvalidPasswordException.class)
 	public ResponseEntity<ExceptionResponse> handleInvalidPasswordException(InvalidPasswordException ex) {
-		System.out.println("ib=nvalid password exception thrown");
 		ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
 		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.UNAUTHORIZED);
+	}
+	@ExceptionHandler(BookNotFoundException.class)
+	public ResponseEntity<ExceptionResponse> handleBookNotFoundException(BookNotFoundException ex){
+		ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+		return new ResponseEntity<ExceptionResponse>(exceptionResponse, HttpStatus.NO_CONTENT);
 	}
 }
